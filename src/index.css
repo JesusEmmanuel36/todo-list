@@ -1,0 +1,387 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --h1-size: 25px;
+  --h2-size: 20px;
+  --button-size: 20px;
+  --p-size: 18px;
+  --input-size: 20px;
+  --button-color: #4cdaa3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lexend", sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: var(--h1-size);
+  text-align: center;
+}
+
+h2 {
+  font-size: var(--h2-size);
+  font-weight: 500;
+}
+
+p {
+  font-size: var(--p-size);
+}
+
+button {
+  transition: 0.3s;
+  &:active {
+    transform: scale(1.05);
+  }
+}
+
+.Todo-Section {
+  justify-self: center;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+
+input {
+  height: 45px;
+
+  font-family: "Lexend";
+  font-size: var(--input-size);
+  color: rgb(0, 0, 0);
+  font-weight: 550;
+  border: none;
+
+  border-bottom: 2px solid black;
+  outline: none;
+}
+
+input::placeholder {
+  color: rgb(0, 0, 0);
+  font-weight: 550;
+  opacity: 1;
+  font-size: var(--input-size);
+}
+
+.Todo-Section .Añadir {
+  display: flex;
+  width: 100%;
+  font-family: "Lexend";
+  height: 45px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Lexend";
+  font-size: var(--button-size);
+  justify-content: center;
+  align-items: center;
+  font-weight: 650;
+  transition: 0.3s;
+  background-color: var(--button-color);
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    font-size: 21px;
+    background-color: #3dbd8c;
+  }
+
+  &:active {
+    transform: scale(1.04);
+  }
+}
+
+.Todo-Section .Tareas-Container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.Todo-Section .Tareas-Container .Tarea {
+  /* border: 2px solid #9e9a9a; */
+  box-shadow: 0px 0px 5px #cecece;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+
+  width: 100%;
+  height: 70px;
+  padding: 10px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.Todo-Section .Tareas-Container .Tarea .BotonesHolder {
+  display: flex;
+  gap: 15px;
+  right: 15px;
+}
+
+.Todo-Section .Tareas-Container .Tarea button {
+  color: white;
+  font-weight: 550;
+  border: none;
+  width: 120px;
+  height: 40px;
+  font-family: "Lexend";
+  font-size: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.Todo-Section .Tareas-Container .Tarea .Editar {
+  height: 45px;
+  background-color: #27acff;
+
+  transition: 0.3s;
+
+  &:hover {
+    box-shadow: 0px 0px 13px #27acff;
+    font-size: 21px;
+  }
+}
+
+.Todo-Section .Tareas-Container .Tarea .Eliminar {
+  height: 45px;
+  background-color: #ff3e3e;
+  transition: 0.3s;
+  &:hover {
+    box-shadow: 0px 0px 13px #ff3e3e;
+    font-size: 21px;
+  }
+}
+
+.MarcadorYnombre {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.Todo-Section .Tareas-Container .Tarea .Marcador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 3.5px solid var(--button-color);
+  width: 45px;
+  height: 45px;
+}
+
+.Todo-Section .Tareas-Container .Tarea .Marcador.Activo {
+  background-color: var(--button-color);
+}
+
+.Todo-Section .Tareas-Container .Tarea .Marcador svg {
+  width: 50px;
+  height: 35px;
+}
+
+.h2.Activo {
+  text-decoration: line-through;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.overlay.activo {
+  display: inline;
+
+  opacity: 1;
+  visibility: visible;
+}
+
+/* EDITOR */
+.editor {
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  border-radius: 7px;
+  padding: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: calc(100% - 60px); /* 100% menos el padding horizontal total */
+  height: auto;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.editor.activo {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.EditarTarea{
+  align-self: center;
+  z-index: 1;
+  margin-bottom: -10px;
+  font-weight: 650;
+}
+
+.editor .GuardarCerrar {
+  display: flex;
+  gap: 10px;
+}
+
+.editor button {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: var(--button-size);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.editor .GuardarCerrar .Guardar {
+  background-color: var(--button-color);
+  transition: 0.3s;
+
+  &:hover {
+    box-shadow: 0px 0px 13px var(--button-color);
+    font-size: 21px;
+  }
+}
+
+.editor .GuardarCerrar .Cerrar {
+  background-color: #ff3e3e;
+  transition: 0.3s;
+  &:hover {
+    box-shadow: 0px 0px 13px #ff3e3e;
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --h1-size: 22px;
+    --h2-size: 18px;
+    --button-size: 18px;
+    --input-size: 18px
+  }
+
+  .Todo-Section .Añadir {
+    &:hover {
+      font-size: 19px;
+    }
+  }
+
+  .Todo-Section .Tareas-Container .Tarea button {
+    width: 90px;
+    height: 45px;
+    font-size: 18px;
+
+    font-weight: 650;
+    &:hover {
+      font-size: 19px !important;
+    }
+  }
+
+  .Todo-Section .Tareas-Container .Tarea .Marcador {
+    height: 45px;
+    width: 45px;
+  }
+
+  .editor button {
+    &:hover {
+      font-size: 19px;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  :root {
+    --h1-size: 20px;
+    --h2-size: 16px;
+    --button-size: 16px;
+    --input-size: 18px
+  }
+
+  .Todo-Section .Añadir {
+    &:hover {
+      font-size: 17px !important;
+    }
+  }
+
+  .Todo-Section .Tareas-Container .Tarea {
+    box-shadow: 0px 0px 5px #cecece;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+
+  .Todo-Section .Tareas-Container .Tarea .BotonesHolder {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .Todo-Section .Tareas-Container .Tarea button {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 4px;
+
+    &:hover {
+      font-size: 17px !important;
+    }
+  }
+
+  .Todo-Section .Tareas-Container .Tarea .Marcador {
+    height: 40px;
+    width: 40px;
+  }
+
+  .editor button {
+    &:hover { 
+      font-size: 17px !important; 
+    }
+  }
+}

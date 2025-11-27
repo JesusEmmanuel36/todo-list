@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/perros", "destination": "/perros.html" },
+    { "source": "/gatos", "destination": "/gatos.html" },
+    { "source": "/donativos", "destination": "/donativos.html" }
+  ]
+}
