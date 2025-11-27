@@ -24,7 +24,6 @@ export default function App() {
   // 🔹 Añadir tarea
   const añadirTarea = async () => {
     if (nombre.trim() === "") return;
-
     try {
       const res = await fetch("/api/tareas", {
         method: "POST",
@@ -104,11 +103,12 @@ export default function App() {
           Añadir
         </button>
 
-        <div className="Tareas-Container" id="Tareas-Container">
+        <div className="Tareas-Container">
           {tareas.map((t) => (
             <Tarea
               key={t._id}
               Nombre={selection === t.nombre ? selection : t.nombre}
+              activo={t.activo} // 🔹 ahora se pasa desde DB
               OnDelete={() => removerTarea(t._id)}
               OnEdit={() => {
                 editorHandler();
