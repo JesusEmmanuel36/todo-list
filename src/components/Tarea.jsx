@@ -1,17 +1,12 @@
 export default function Tarea({ Nombre, OnDelete, OnEdit, OnSelect, activo }) {
-
-  const activeHandler = (e) => {
-    e.stopPropagation();
-    OnSelect(!activo);
+  const activeHandler = () => {
+    OnSelect(!activo); // Cambia el estado al hacer click en todo el div
   };
 
   return (
-    <div className="Tarea">
+    <div className="Tarea" onClick={activeHandler}>
       <div className="MarcadorYnombre">
-        <button
-          className={activo ? "Marcador Activo" : "Marcador"}
-          onClick={activeHandler}
-        >
+        <button className={activo ? "Marcador Activo" : "Marcador"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
@@ -28,13 +23,19 @@ export default function Tarea({ Nombre, OnDelete, OnEdit, OnSelect, activo }) {
       <div className="BotonesHolder">
         <button
           className="Editar"
-          onClick={(e) => { e.stopPropagation(); OnEdit(); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            OnEdit();
+          }}
         >
           Editar
         </button>
         <button
           className="Eliminar"
-          onClick={(e) => { e.stopPropagation(); OnDelete(); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            OnDelete();
+          }}
         >
           Eliminar
         </button>
